@@ -1,0 +1,39 @@
+  syntax = "proto3";
+  option java_multiple_files = true;
+  package product;
+
+
+  service ProductService {
+    rpc GetProductById(GetProductByIdRequest) returns (ProductResponse);
+    rpc GetProductByName(GetProductByNameRequest) returns (ProductResponse);
+    rpc UpdateProductQuantity(UpdateProductQuantityRequest) returns (ProductResponse);
+  }
+
+  message GetProductByIdRequest {
+    int64 id = 1;
+  }
+
+  message GetProductByNameRequest {
+    string name = 1;
+  }
+
+  message UpdateProductQuantityRequest {
+    int64 id = 1;
+    int32 quantity = 2;
+    QuantityOperation operation = 3;
+  }
+
+  enum QuantityOperation {
+    INCREASE = 0;
+    DECREASE = 1;
+  }
+
+  message ProductResponse {
+    int64 id = 1;
+    string name = 2;
+    int32 num = 3;
+    string style = 4;
+    string provider = 5;
+
+
+  }

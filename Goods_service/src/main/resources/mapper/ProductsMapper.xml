@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hlw.goods_service.mapper.ProductsMapper">
+
+    <resultMap id="BaseResultMap" type="com.hlw.goods_service.domain.Products">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="num" column="num" jdbcType="INTEGER"/>
+            <result property="style" column="style" jdbcType="VARCHAR"/>
+            <result property="provider" column="provider" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,num,
+        style,provider
+    </sql>
+
+    <select id="getProductById" resultMap="BaseResultMap">
+        SELECT id, name, num, style, provider
+        FROM products
+        WHERE id = #{id}
+    </select>
+
+    <select id="getProductByName" resultMap="BaseResultMap">
+        SELECT id, name, num, style, provider
+        FROM products
+        WHERE name = #{name}
+    </select>
+
+    <update id="addProductNum">
+        UPDATE products
+        SET num = num + 1
+        WHERE id = #{id}
+    </update>
+
+    <update id="reduceProductNum">
+        UPDATE products
+        SET num = num - 1
+        WHERE id = #{id}
+    </update>
+</mapper>
